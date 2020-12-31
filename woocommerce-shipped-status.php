@@ -13,5 +13,16 @@
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
 
+use Fanucchi\Create_Shipped_Status;
+
 require_once __DIR__ . '/vendor/autoload.php';
 
+if ( ! class_exists( 'FN_Shipped_Status' ) ) {
+	class FN_Shipped_Status {
+		public function __construct() {
+			new Create_Shipped_Status();
+		}
+	}
+}
+
+new FN_Shipped_Status();
