@@ -1,0 +1,10 @@
+
+{
+  "name": "woocommerce-shipped-status",
+  "version": "1.0.0",
+  "author": "Douglas Fanucchi",
+  "scripts" : {
+  },
+  "devDependencies": {
+  }
+}
