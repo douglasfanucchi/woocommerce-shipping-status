@@ -43,6 +43,10 @@ if ( ! class_exists( 'Fanucchi\\Create_Shipped_Status' ) ) {
 
 			return $new_statuses;
 		}
+
+		public function get_shipped_status_id() : string {
+			return $this->shipped_status_id;
+		}
 	}
 
 }
