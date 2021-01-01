@@ -18,6 +18,10 @@ use Fanucchi\FN_Email_On_Shipped;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+if ( ! defined( 'FN_SHIPPED_STATUS_PATH' ) ) {
+	define( 'FN_SHIPPED_STATUS_PATH', dirname( __FILE__ ) );
+}
+
 if ( ! class_exists( 'FN_Shipped_Status' ) ) {
 	class FN_Shipped_Status {
 		public function __construct() {
