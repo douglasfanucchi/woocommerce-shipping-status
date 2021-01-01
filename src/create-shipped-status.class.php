@@ -18,6 +18,7 @@ if ( ! class_exists( 'Fanucchi\\FN_Create_Shipped_Status' ) ) {
 
 		private function add_filters() {
 			\add_filter( 'wc_order_statuses', array( $this, 'register_shipped_status' ) );
+			\add_filter( 'bulk_actions-edit-shop_order', array( $this, 'add_shipped_status_to_bulk_actions' ) );
 		}
 
 		public function create_order_status() {
@@ -42,6 +43,12 @@ if ( ! class_exists( 'Fanucchi\\FN_Create_Shipped_Status' ) ) {
 			}
 
 			return $new_statuses;
+		}
+
+		public function add_shipped_status_to_bulk_actions( array $bulk_actions ) : array {
+			$bulk_actions['mark_shipped-status'] = __( 'Change status to shipped', 'woocommerce-shipped-status' );
+
+			return $bulk_actions;
 		}
 
 		public function get_shipped_status_id() : string {
