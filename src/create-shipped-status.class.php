@@ -17,7 +17,7 @@ if ( ! class_exists( 'Fanucchi\\FN_Create_Shipped_Status' ) ) {
 		}
 
 		private function add_filters() {
-			\add_filter( 'wc_order_statuses', array( $this, 'register_order_status' ) );
+			\add_filter( 'wc_order_statuses', array( $this, 'register_shipped_status' ) );
 		}
 
 		public function create_order_status() {
@@ -30,7 +30,7 @@ if ( ! class_exists( 'Fanucchi\\FN_Create_Shipped_Status' ) ) {
 			\register_post_status( $this->shipped_status_id, $options );
 		}
 
-		public function register_order_status( array $statuses ) : array {
+		public function register_shipped_status( array $statuses ) : array {
 			$new_statuses = array();
 
 			foreach ( $statuses as $status_key => $status ) {
