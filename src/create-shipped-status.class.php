@@ -2,9 +2,9 @@
 
 namespace Fanucchi;
 
-if ( ! class_exists( 'Fanucchi\\Create_Shipped_Status' ) ) {
+if ( ! class_exists( 'Fanucchi\\FN_Create_Shipped_Status' ) ) {
 
-	class Create_Shipped_Status {
+	class FN_Create_Shipped_Status {
 		private string $shipped_status_id = 'wc-shipped-status';
 
 		public function __construct() {

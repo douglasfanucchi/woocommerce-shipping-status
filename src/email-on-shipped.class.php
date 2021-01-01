@@ -3,8 +3,8 @@ namespace Fanucchi;
 
 use Fanucchi\Services\Email;
 
-if ( ! class_exists( 'Fanucchi\\Email_On_Shipped' ) ) {
-	class Email_On_Shipped {
+if ( ! class_exists( 'Fanucchi\\FN_Email_On_Shipped' ) ) {
+	class FN_Email_On_Shipped {
 		private string $shipped_status_id;
 
 		public function __construct( string $shipped_status_id ) {
