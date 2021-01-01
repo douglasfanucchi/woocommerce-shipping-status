@@ -1,7 +1,7 @@
 <?php
 namespace Fanucchi;
 
-use Fanucchi\Services\Email;
+use Fanucchi\Services\FN_Shipped;
 
 if ( ! class_exists( 'Fanucchi\\FN_Email_On_Shipped' ) ) {
 	class FN_Email_On_Shipped {
@@ -14,30 +14,33 @@ if ( ! class_exists( 'Fanucchi\\FN_Email_On_Shipped' ) ) {
 		}
 
 		private function add_actions() {
-			\add_action( 'transition_post_status', array( $this, 'send_email' ), 10, 3 );
+			\add_action( 'woocommerce_order_status_' . $this->shipped_status_id, array( $this, 'send_email' ), 10 );
 			\add_action( 'woocommerce_settings_tabs_fn_email_tab', array( $this, 'output_settings' ), 50 );
 			\add_action( 'woocommerce_update_options_fn_email_tab', array( $this, 'save_settings' ) );
 		}
 
 		private function add_filters() {
 			\add_filter( 'woocommerce_settings_tabs_array', array( $this, 'add_email_settings_tab' ), 50 );
+			\add_filter( 'woocommerce_email_actions', array( $this, 'register_email_action' ) );
+			\add_filter( 'woocommerce_email_classes', array( $this, 'register_shipped_mail' ) );
 		}
 
-		public function send_email( $_, string $old_status, \WP_Post $post ) {
-			$new_status = null;
+		public function register_email_action( array $actions ) : array {
+			$actions[] = "woocommerce_order_status_{$this->shipped_status_id}";
 
-			if ( ! empty( $_POST['order_status'] ) ) {
-				$new_status = \sanitize_text_field( $_POST['order_status'] );
-			}
+			return $actions;
+		}
 
-			if ( $new_status !== $this->shipped_status_id || $old_status === $this->shipped_status_id || 'shop_order' !== $post->post_type ) {
-				return;
-			}
+		public function register_shipped_mail( array $emails ) {
+			$emails['FN_Shipped'] = new FN_Shipped();
 
-			$order = new \WC_Order( $post->ID );
+			return $emails;
+		}
 
-			$email_service = new Email( $order );
-			$email_service->send();
+		public function send_email( int $order_id ) {
+			$emails = WC()->mailer()->get_emails();
+			$email  = $emails['FN_Shipped'];
+			$email->trigger( $order_id );
 		}
 
 		public function add_email_settings_tab( array $tabs ) : array {
