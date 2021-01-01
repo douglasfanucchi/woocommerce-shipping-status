@@ -34,7 +34,9 @@ if ( ! class_exists( 'Fanucchi\\Email_On_Shipped' ) ) {
 				return;
 			}
 
-			$email_service = new Email( $post );
+			$order = new \WC_Order( $post->ID );
+
+			$email_service = new Email( $order );
 			$email_service->send();
 		}
 
