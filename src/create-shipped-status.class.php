@@ -5,7 +5,7 @@ namespace Fanucchi;
 if ( ! class_exists( 'Fanucchi\\FN_Create_Shipped_Status' ) ) {
 
 	class FN_Create_Shipped_Status {
-		private string $shipped_status_id = 'wc-shipped-status';
+		private string $shipped_status_id = 'shipped-status';
 
 		public function __construct() {
 			$this->add_actions();
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Fanucchi\\FN_Create_Shipped_Status' ) ) {
 				'public'      => true,
 			);
 
-			\register_post_status( $this->shipped_status_id, $options );
+			\register_post_status( 'wc-' . $this->shipped_status_id, $options );
 		}
 
 		public function register_shipped_status( array $statuses ) : array {
@@ -38,7 +38,7 @@ if ( ! class_exists( 'Fanucchi\\FN_Create_Shipped_Status' ) ) {
 				$new_statuses[ $status_key ] = $status;
 
 				if ( 'wc-on-hold' === $status_key ) {
-					$new_statuses[ $this->shipped_status_id ] = _x( 'Shipped', 'Order Status', 'woocommerce-shipped-status' );
+					$new_statuses[ 'wc-' . $this->shipped_status_id ] = _x( 'Shipped', 'Order Status', 'woocommerce-shipped-status' );
 				}
 			}
 
