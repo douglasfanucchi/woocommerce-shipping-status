@@ -3,13 +3,13 @@ namespace Fanucchi;
 
 use Fanucchi\Services\Email;
 
-if ( ! class_exists( 'Fanucchi\\Send_Email_On_Shipped' ) ) {
-	class Send_Email_On_Shipped {
+if ( ! class_exists( 'Fanucchi\\Email_On_Shipped' ) ) {
+	class Email_On_Shipped {
 		private string $shipped_status_id;
 
 		public function __construct( string $shipped_status_id ) {
 			$this->shipped_status_id = $shipped_status_id;
-            $this->add_actions();
+			$this->add_actions();
 		}
 
 		private function add_actions() {

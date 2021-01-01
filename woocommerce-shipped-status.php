@@ -14,15 +14,15 @@
  */
 
 use Fanucchi\Create_Shipped_Status;
-use Fanucchi\Send_Email_On_Shipped;
+use Fanucchi\Email_On_Shipped;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
 if ( ! class_exists( 'FN_Shipped_Status' ) ) {
 	class FN_Shipped_Status {
 		public function __construct() {
-			$shipped_status        = new Create_Shipped_Status();
-			$send_email_on_shipped = new Send_Email_On_Shipped( $shipped_status->get_shipped_status_id() );
+			$shipped_status   = new Create_Shipped_Status();
+			$email_on_shipped = new Email_On_Shipped( $shipped_status->get_shipped_status_id() );
 		}
 	}
 }
