@@ -27,6 +27,10 @@ if ( ! \defined( 'FN_SHIPPED_STATUS_TEMPLATES_PATH' ) ) {
 	\define( 'FN_SHIPPED_STATUS_TEMPLATES_PATH', FN_SHIPPED_STATUS_PATH . '/src/templates/' );
 }
 
+if ( ! \defined('FN_SHIPPED_STATUS_URL') ) {
+	define( 'FN_SHIPPED_STATUS_URL', plugins_url( '/', __FILE__ ) );
+}
+
 if ( ! class_exists( 'FN_Shipped_Status' ) ) {
 	class FN_Shipped_Status {
 		public function __construct() {
