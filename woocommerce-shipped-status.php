@@ -15,11 +15,16 @@
 
 use Fanucchi\FN_Create_Shipped_Status;
 use Fanucchi\FN_Email_On_Shipped;
+use Fanucchi\FN_Order_Status_Tracking;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
 if ( ! defined( 'FN_SHIPPED_STATUS_PATH' ) ) {
 	define( 'FN_SHIPPED_STATUS_PATH', dirname( __FILE__ ) );
+}
+
+if ( ! \defined( 'FN_SHIPPED_STATUS_TEMPLATES_PATH' ) ) {
+	\define( 'FN_SHIPPED_STATUS_TEMPLATES_PATH', FN_SHIPPED_STATUS_PATH . '/src/templates/' );
 }
 
 if ( ! class_exists( 'FN_Shipped_Status' ) ) {
