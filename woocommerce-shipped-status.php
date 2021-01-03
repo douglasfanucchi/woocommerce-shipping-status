@@ -31,11 +31,19 @@ if ( ! \defined('FN_SHIPPED_STATUS_URL') ) {
 	define( 'FN_SHIPPED_STATUS_URL', plugins_url( '/', __FILE__ ) );
 }
 
+\add_action(
+	'woocommerce_view_order',
+	function( $order_id ) {
+		\do_shortcode( '[fn_status_tracking order_id="' . $order_id . '"]' );
+	}
+);
+
 if ( ! class_exists( 'FN_Shipped_Status' ) ) {
 	class FN_Shipped_Status {
 		public function __construct() {
 			$shipped_status   = new FN_Create_Shipped_Status();
 			$email_on_shipped = new FN_Email_On_Shipped( $shipped_status->get_shipped_status_id() );
+			$status_tracking  = new FN_Order_Status_Tracking();
 		}
 	}
 }
